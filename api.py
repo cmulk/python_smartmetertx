@@ -1,5 +1,6 @@
 import requests
 import json
+from pathlib import Path
 
 AUTH_URL = "https://smartmetertexas.com/api/user/authenticate"
 DAILY_URL = "https://smartmetertexas.com/api/adhoc/dailysynch"
@@ -17,13 +18,14 @@ class MeterReader:
         self.auth_url = auth_url
         self.daily_url = daily_url
         self.timeout = timeout
+        self.certpath = f"{Path(__file__).parent}/{CERT}"
         # self.session.headers["referrer"] = "https://www.smartmetertexas.com/home"
         # self.session.headers["origin"] = "https://www.smartmetertexas.com"
         # self.session.headers["user-agent"] = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.142 Safari/537.36"
 
     def api_call(self, url, json):
         try:
-            return self.session.post(url=url, json=json, timeout=self.timeout, verify=CERT)
+            return self.session.post(url=url, json=json, timeout=self.timeout, verify=self.certpath)
         except Exception as ex:
             print(repr(ex))
             raise
