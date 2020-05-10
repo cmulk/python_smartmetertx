@@ -1,10 +1,10 @@
-from SmartMeterTX import SmartMeterTX
+from api import MeterReader
 
 USER="<<YOUR_USERNAME>>"
 PASS="<<YOUR_PASSWORD>>"
 ESSID = "<<YOUR_ESSID or list of ESSIDS>>"
 
-tx = SmartMeterTX()
+tx = MeterReader()
 
 r = tx.login(USER, PASS)
 

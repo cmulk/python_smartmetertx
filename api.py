@@ -9,7 +9,7 @@ TIMEOUT = 30
 CERT = "www-smartmetertexas-com-chain.pem"
 
 
-class SmartMeterTX:
+class MeterReader:
     logged_in = False
 
     def __init__(self, auth_url=AUTH_URL, daily_url=DAILY_URL, timeout=TIMEOUT):
