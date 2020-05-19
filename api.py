@@ -3,7 +3,7 @@ import json
 from pathlib import Path
 
 AUTH_URL = "https://smartmetertexas.com/api/user/authenticate"
-DAILY_URL = "https://smartmetertexas.com/api/adhoc/dailysynch"
+DAILY_URL = "https://smartmetertexas.com/api/usage/daily"
 TIMEOUT = 30
 
 # pinned certificate trust
@@ -47,21 +47,15 @@ class MeterReader:
             self.logged_in = True
             return r
 
-    def get_daily_read(self, essid, start_date, end_date):
+    def get_daily_read(self, esiid, start_date, end_date):
         if self.logged_in == False:
             print("You must login first.")
             return False
-        if type(essid) == str:
-            essid = [essid]
 
         json = {
-            "ESIID": essid,
+            "esiid": esiid,
             "endDate": end_date,
-            "readDate": None,
-            "reportFormat": "JSON",
             "startDate": start_date,
-            "versionDate": None,
-            "versionNum": None
         }
 
         r = self.api_call(self.daily_url, json=json)
